@@ -5,3 +5,9 @@ export const post = (params) => {
     params
   })
 }
+// 文章详情
+export const article = (id) => {
+  return axios({
+    url: `/post/${id}`
+  })
+}

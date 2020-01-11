@@ -102,7 +102,9 @@ export default {
   },
   watch: {
     active() {
-      this.init();
+      if (this.newsList[this.active].postlist.length === 0 && this.newsList[this.active].isLoading === false) {
+        this.init();
+      }
     }
   }
 };
