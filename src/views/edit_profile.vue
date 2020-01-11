@@ -24,7 +24,8 @@
 <script>
 import myheader from '@/components/header.vue';
 import myrow from '@/components/myrow.vue';
-import { user } from '@/apis/user.js';
+import { user, userupdate } from '@/apis/user.js';
+import { upload } from '@/apis/file.js'
 export default {
   data() {
     return {
@@ -36,9 +37,21 @@ export default {
     myrow
   },
   methods: {
-    afterRead(file) {
+    async afterRead(file) {
       // 此时可以自行将文件上传至服务器
-      console.log(file);
+    //   console.log(file);
+      let fd = new FormData()
+      fd.append('file', file.file)
+      let res = await upload(fd)
+      //   console.log(res);
+      if (res.data.message === '文件上传成功') {
+        let res2 = await userupdate(this.user.id, { head_img: res.data.data.url })
+        // console.log(res2);
+        this.$toast(res2.data.message)
+        if (res2.data.message === '修改成功') {
+          this.user.head_img = res2.data.data.head_img
+        }
+      }
     }
   },
   async mounted() {

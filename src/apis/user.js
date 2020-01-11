@@ -19,3 +19,11 @@ export const user = (id) => {
     url: `/user/${id}`
   })
 }
+// 编辑信息
+export const userupdate = (id, data) => {
+  return axios({
+    method: 'post',
+    url: `/user_update/${id}`,
+    data
+  })
+}
