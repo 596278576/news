@@ -12,7 +12,12 @@
       />
     </label>
     <van-uploader :after-read="afterRead" id="img" />
-    <myrow left="昵称" :right="user.nickname"></myrow>
+    <myrow left="昵称" :right="user.nickname" @click="show1=!show1"></myrow>
+    <!-- 修改昵称弹框 -->
+    <van-dialog v-model="show1" title="修改昵称" show-cancel-button @confirm='upnickname'>
+        <van-field :value="user.nickname" placeholder="请输入昵称" ref='nick'/>
+    </van-dialog>
+
     <myrow left="密码" :right="user.password"></myrow>
 
     <myrow left="性别" :right="user.gender===0?'女':'男'"></myrow>
@@ -25,11 +30,12 @@
 import myheader from '@/components/header.vue';
 import myrow from '@/components/myrow.vue';
 import { user, userupdate } from '@/apis/user.js';
-import { upload } from '@/apis/file.js'
+import { upload } from '@/apis/file.js';
 export default {
   data() {
     return {
-      user: {}
+      user: {},
+      show1: false
     };
   },
   components: {
@@ -39,18 +45,29 @@ export default {
   methods: {
     async afterRead(file) {
       // 此时可以自行将文件上传至服务器
-    //   console.log(file);
-      let fd = new FormData()
-      fd.append('file', file.file)
-      let res = await upload(fd)
+      //   console.log(file);
+      let fd = new FormData();
+      fd.append('file', file.file);
+      let res = await upload(fd);
       //   console.log(res);
       if (res.data.message === '文件上传成功') {
-        let res2 = await userupdate(this.user.id, { head_img: res.data.data.url })
+        let res2 = await userupdate(this.user.id, {
+          head_img: res.data.data.url
+        });
         // console.log(res2);
-        this.$toast(res2.data.message)
+        this.$toast(res2.data.message);
         if (res2.data.message === '修改成功') {
-          this.user.head_img = res2.data.data.head_img
+          this.user.head_img = res2.data.data.head_img;
         }
+      }
+    },
+    async upnickname() {
+    //   console.log(this.$refs.nick.$refs.input.value);
+      let res = await userupdate(this.user.id, { nickname: this.$refs.nick.$refs.input.value })
+      console.log(res);
+      this.$toast(res.data.message)
+      if (res.data.message === '修改成功') {
+        this.user.nickname = res.data.data.nickname
       }
     }
   },

@@ -1,13 +1,18 @@
 <template>
   <div class="myrow">
       <span>{{left}}</span>
-      <span>{{right}}<van-icon name="arrow" /></span>
+      <span @click="click">{{right}}<van-icon name="arrow" /></span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['left', 'right']
+  props: ['left', 'right'],
+  methods: {
+    click() {
+      this.$emit('click')
+    }
+  }
 }
 </script>
 
