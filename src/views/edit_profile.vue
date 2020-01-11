@@ -25,7 +25,12 @@
       <van-field  placeholder="请输入新密码" ref="newpwd" />
     </van-dialog>
 
-    <myrow left="性别" :right="user.gender===0?'女':'男'"></myrow>
+    <myrow left="性别" :right="user.gender===0?'女':'男'" @click="show3=!show3"></myrow>
+    <!-- 修改性别 -->
+        <van-dialog v-model="show3" title="修改性别" show-cancel-button @confirm="upgender" >
+            <van-picker :columns="['女','男']" @change="onChange"
+            :default-index="user.gender" />
+    </van-dialog>
 
     <myrow left="设置"></myrow>
   </div>
@@ -41,7 +46,9 @@ export default {
     return {
       user: {},
       show1: false,
-      show2: false
+      show2: false,
+      show3: false,
+      gender: ''
     };
   },
   components: {
@@ -104,6 +111,16 @@ export default {
     },
     async uppwd() {
 
+    },
+    async upgender() {
+      let res = await userupdate(this.user.id, { gender: this.gender })
+
+      this.$toast(res.data.message)
+      this.user.gender = this.gender
+    },
+    onChange(picker, value, index) {
+    //   Toast(`当前值：${value}, 当前索引：${index}`);
+      this.gender = index
     }
   },
   async mounted() {
