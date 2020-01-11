@@ -8,6 +8,7 @@
       </div>
       <van-icon name="friends-o" @click="$router.push({name:'personal'})" />
     </div>
+    <van-icon name="plus" @click="$router.push({name:'column'})"/>
     <nav>
       <!-- 导航栏 -->
       <van-tabs v-model="active" sticky swipeable>
@@ -111,6 +112,19 @@ export default {
 </script>
 
 <style lang='less' scoped>
+/deep/ .van-icon-plus{
+  position: sticky;
+  top:0;
+  z-index: 1000;
+  // right: 0px;
+  float: right;
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  background: #fff;
+}
 .header {
   display: flex;
   justify-content: space-between;

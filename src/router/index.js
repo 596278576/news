@@ -6,6 +6,7 @@ import personal from '@/views/Personal.vue'
 import register from '@/views/register.vue'
 import edit from '@/views/edit_profile.vue'
 import article from '@/views/article.vue'
+import column from '@/views/column.vue'
 
 Vue.use(VueRouter)
 let router = new VueRouter({
@@ -14,6 +15,11 @@ let router = new VueRouter({
       name: 'index',
       path: '/',
       component: index
+    },
+    {
+      name: 'column',
+      path: '/column',
+      component: column
     },
     {
       name: 'article',
