@@ -1,5 +1,10 @@
 import Vue from 'vue'
-import App from './App.vue'
+
+// 引入样式
+import '@/styles/animate.css'
+import App from './views/Index.vue'
+
+import '@/styles/style.css'
 
 Vue.config.productionTip = false
 
