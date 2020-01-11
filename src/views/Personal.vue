@@ -3,12 +3,12 @@
     <router-link to="/edit_profile">
       <div class="profile">
         <!-- $axios.defaults.baseURL读取axios的服务器路径 -->
-        <img src="http://img1.imgtn.bdimg.com/it/u=3757784226,1202878475&fm=26&gp=0.jpg" alt />
+        <img :src="'http://127.0.0.1:3000'+user.head_img" alt />
         <div class="profile-center">
           <div class="name">
-            <span class="iconfont iconxingbienan"></span>我就是我
+            <span class="iconfont iconxingbienan"></span>{{user.nickname}}
           </div>
-          <div class="time">2019-9-24</div>
+          <div class="time">{{user.create_date}}</div>
         </div>
         <span class="iconfont iconjiantou1"></span>
       </div>
@@ -19,9 +19,15 @@
 <script>
 import { user } from '@/apis/user.js'
 export default {
+  data () {
+    return {
+      user: {}
+    }
+  },
   async mounted() {
     let res = await user(JSON.parse(localStorage.getItem('user')).id)
     console.log(res);
+    this.user = res.data.data
   }
 }
 </script>
