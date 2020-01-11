@@ -116,6 +116,7 @@ export default {
       let res = await userupdate(this.user.id, { gender: this.gender })
 
       this.$toast(res.data.message)
+      //   this.user.gender = this.gender
       this.user.gender = this.gender
     },
     onChange(picker, value, index) {
