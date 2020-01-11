@@ -5,6 +5,7 @@ import login from '@/views/login.vue'
 import personal from '@/views/Personal.vue'
 import register from '@/views/register.vue'
 import edit from '@/views/edit_profile.vue'
+import article from '@/views/article.vue'
 
 Vue.use(VueRouter)
 let router = new VueRouter({
@@ -13,6 +14,11 @@ let router = new VueRouter({
       name: 'index',
       path: '/',
       component: index
+    },
+    {
+      name: 'article',
+      path: '/article/:id',
+      component: article
     },
     {
       name: 'edit',

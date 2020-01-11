@@ -1,5 +1,9 @@
 <template>
-  <div class="single" v-if="article.cover.length <= 2 && article.type === 1">
+  <div
+    class="single"
+    v-if="article.cover.length <= 2 && article.type === 1"
+    @click="$router.push({path:`/article/${article.id}`})"
+  >
     <div class="left">
       <p class="content">{{article.title}}</p>
       <p class="info">
@@ -10,7 +14,11 @@
     <img :src="article.cover[0].url" alt />
   </div>
 
-  <div class="single1" v-else-if="article.cover.length > 2 && article.type === 1">
+  <div
+    class="single1"
+    v-else-if="article.cover.length > 2 && article.type === 1"
+    @click="$router.push({path:`/article/${article.id}`})"
+  >
     <p class="content" style="padding: 0px 5px;">{{article.title}}</p>
     <div class="imgs">
       <img v-for="item in article.cover" :key="item.id" :src="item.url" alt />
@@ -21,7 +29,7 @@
     </p>
   </div>
 
-  <div class="single2" v-else-if="article.type === 2">
+  <div class="single2" v-else-if="article.type === 2" @click="$router.push({path:`/article/${article.id}`})" >
     <p class="content" style="padding: 0px 5px;">{{article.title}}</p>
     <div class="myvideo">
       <img :src="article.cover[0].url" alt />
@@ -40,7 +48,7 @@
 export default {
   // post:当前需要渲染的新闻对象
   props: ['article']
-}
+};
 </script>
 
 <style lang='less' scoped>
