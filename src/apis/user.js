@@ -13,3 +13,9 @@ export const register = (data) => {
     data
   })
 }
+// 用户详情
+export const user = (id) => {
+  return axios({
+    url: `/user/${id}`
+  })
+}

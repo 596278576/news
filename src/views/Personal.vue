@@ -17,7 +17,13 @@
 </template>
 
 <script>
-export default {}
+import { user } from '@/apis/user.js'
+export default {
+  async mounted() {
+    let res = await user(JSON.parse(localStorage.getItem('user')).id)
+    console.log(res);
+  }
+}
 </script>
 
 <style lang='less' scoped>
