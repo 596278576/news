@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import index from '@/views/index.vue'
 import login from '@/views/login.vue'
 import personal from '@/views/Personal.vue'
+import register from '@/views/register.vue'
 Vue.use(VueRouter)
 let router = new VueRouter({
   routes: [
@@ -10,6 +11,11 @@ let router = new VueRouter({
       name: 'index',
       path: '/',
       component: index
+    },
+    {
+      name: 'register',
+      path: '/register',
+      component: register
     },
     {
       name: 'personal',
